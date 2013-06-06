@@ -59,23 +59,12 @@ public class TransferOutInPatientUtil {
 	 */
 	public static HashMap<Integer, String> createNewProviderOptions() {
 		HashMap<Integer, String> providerOptions = new HashMap<Integer, String>();
-		List<User> providers = Context.getUserService().getUsersByRole(
-				Context.getUserService().getRole("Provider"));
-		List<Provider> realProviders = Context.getProviderService()
+		List<Provider> providers = Context.getProviderService()
 				.getAllProviders();
 
 		if (providers != null) {
-			for (User user : providers) {
-				providerOptions.put(user.getPerson().getPersonId(), user
-						.getPersonName().getGivenName()
-						+ "  "
-						+ user.getPersonName().getFamilyName());
-			}
-		}
-
-		if (realProviders != null) {
 			// Look up for populating the Map of Providers (a.k.a Person):
-			for (Provider pro : realProviders)
+			for (Provider pro : providers)
 				providerOptions
 						.put(pro.getPerson().getPersonId(), pro.getPerson()
 								.getPersonName().getGivenName()
