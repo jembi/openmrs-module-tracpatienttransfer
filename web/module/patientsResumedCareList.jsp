@@ -1,7 +1,6 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery-1.3.2.js" />
 <%@ taglib prefix="transfertag" uri="/WEB-INF/view/module/tracpatienttransfer/taglibs/transfertag.tld" %>
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/patienttransfers.css" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/listing.css" />
@@ -125,16 +124,16 @@
 </div>
 
 <script type="text/javascript">
-	var $ = jQuery.noConflict();
-	$(document).ready(function(){
-		$("#viewData").click(function(){
-			$("#graph").hide();
-			$("#data").show();
+	var $toip = jQuery.noConflict();
+	$toip(document).ready(function(){
+		$toip("#viewData").click(function(){
+			$toip("#graph").hide();
+			$toip("#data").show();
 		});
 		
-		$("#viewGraph").click(function(){
-			$("#data").hide();
-			$("#graph").show();
+		$toip("#viewGraph").click(function(){
+			$toip("#data").hide();
+			$toip("#graph").show();
 		});
 	});
 </script>
