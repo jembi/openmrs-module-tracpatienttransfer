@@ -172,10 +172,11 @@ public class PatientTransferDAOImpl implements PatientTransferDAO {
 			Date dateFrom, Date dateTo, Integer maxAge, Integer minAge,
 			Integer providerId) {
 
-		String query = "SELECT o.obs_id FROM obs o INNER JOIN person p ON o.person_id=p.person_id"
+		String query = "SELECT o.obs_id FROM obs o INNER JOIN person p ON o.person_id = p.person_id"
 				+ ((providerId == null) ? ""
 						: " INNER JOIN encounter e ON o.encounter_id=e.encounter_id" +
-								" INNER JOIN encounter_provider ep ON e.encounter_id = ep.encounter_id")
+								" INNER JOIN encounter_provider ep ON e.encounter_id = ep.encounter_id" +
+						" INNER JOIN provider pr ON pr.provider_id = ep.provider_id")
 				+ " WHERE o.concept_id="
 				+ TransferOutInPatientConstant.REASON_PATIENT_EXITED_FROM_CARE;
 
@@ -190,7 +191,7 @@ public class PatientTransferDAOImpl implements PatientTransferDAO {
 						+ "'";
 		query += (dateTo == null) ? "" : " AND CAST(o.obs_datetime AS DATE)<='"
 				+ new SimpleDateFormat("yyyy-MM-dd").format(dateTo) + "'";
-		query += (providerId == null) ? "" : " AND ep.provider_id=" + providerId;
+		query += (providerId == null) ? "" : " AND pr.person_id=" + providerId;
 
 		query += " ORDER BY o.obs_datetime DESC";
 
