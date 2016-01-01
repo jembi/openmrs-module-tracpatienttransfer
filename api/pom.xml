@@ -6,7 +6,6 @@
 		<artifactId>tracpatienttransfer</artifactId>
 		<version>0.3.3.33-SNAPSHOT</version>
 	</parent>
-	<groupId>org.openmrs.module</groupId>
 	<artifactId>tracpatienttransfer-api</artifactId>
 	<packaging>jar</packaging>
 	<name>MOH-TRAC Patient exits from care API</name>
@@ -32,9 +31,9 @@
 			<type>jar</type>
 		</dependency>
 		<dependency>
-			<groupId>org.openmrs.test</groupId>
-			<artifactId>openmrs-test</artifactId>
-			<type>jar</type>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohtracportal-api</artifactId>
+			<version>0.2.3.1</version>
 		</dependency>
 	</dependencies>
 

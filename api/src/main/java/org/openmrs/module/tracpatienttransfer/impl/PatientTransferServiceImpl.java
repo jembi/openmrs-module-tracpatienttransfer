@@ -3,9 +3,14 @@
  */
 package org.openmrs.module.tracpatienttransfer.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.openmrs.DrugOrder;
+import org.openmrs.Order;
+import org.openmrs.Patient;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.tracpatienttransfer.db.PatientTransferDAO;
 import org.openmrs.module.tracpatienttransfer.service.PatientTransferService;
 
@@ -96,4 +101,13 @@ public class PatientTransferServiceImpl implements PatientTransferService {
 		return null;
 	}
 
+	public List<DrugOrder> getDrugOrdersByPatient(Patient patient) {
+		List<Order> orderList = Context.getOrderService().getOrders(patient, Context.getOrderService().getCareSettingByUuid("6f0c9a92-6f24-11e3-af88-005056821db0"), Context.getOrderService().getOrderTypeByName("Drug order"), false);//TODO, careseting should't be hard-coded to OUTPATIENT as here
+		List<DrugOrder> drugOrders = new ArrayList<DrugOrder>();
+		
+		for(Order order: orderList) {
+			drugOrders.add((DrugOrder) order);
+		}
+		return drugOrders;
+	}
 }

@@ -14,9 +14,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.DrugOrder;
 import org.openmrs.Obs;
+import org.openmrs.Order.Action;
 import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
 import org.openmrs.Person;
+import org.openmrs.Provider;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.mohtracportal.util.MohTracUtil;
 import org.openmrs.module.tracpatienttransfer.service.PatientTransferService;
@@ -173,29 +175,27 @@ public class EPFC_ResumeCareFormController extends
 				}
 
 				// restart drugs
-				List<DrugOrder> dOrderList = Context.getOrderService()
-						.getDrugOrdersByPatient(lastObs.getPatient());
+				List<DrugOrder> dOrderList = Context.getService(PatientTransferService.class).getDrugOrdersByPatient(lastObs.getPatient());
 				for (DrugOrder dOrder : dOrderList) {
 					log.info(">>>>>>>DrugOrder......."
 							+ dOrder.isDiscontinuedRightNow()
 							+ ".........DO="
-							+ dOrder.getDiscontinuedDate()
+							+ dOrder.getEffectiveStopDate()
 							+ "...."
-							+ (dOrder.getDiscontinuedDate() == lastObs
+							+ (dOrder.getEffectiveStopDate() == lastObs
 									.getObsDatetime()) + "...Obs="
 							+ lastObs.getObsDatetime() + "----------" + dOrder);
 					DrugOrder dOrderToRestart = null;
 					if (dOrder.isDiscontinuedRightNow()
-							&& dOrder.getDiscontinuedDate().compareTo(
+							&& dOrder.getEffectiveStopDate().compareTo(
 									lastObs.getObsDatetime()) == 0) {
 						dOrderToRestart = dOrder;
-						dOrderToRestart.setDiscontinued(false);
-						dOrderToRestart.setDiscontinuedBy(null);
-						dOrderToRestart.setDiscontinuedDate(null);
+						dOrderToRestart.setAction(Action.RENEW);
+						dOrderToRestart.setDateActivated(new Date());
 						log
 								.info(">>>>>>>PatientProgram.....Trying to update DrugOrder...."
 										+ dOrderToRestart);
-						Context.getOrderService().updateOrder(dOrderToRestart);
+						Context.getOrderService().saveOrder(dOrderToRestart, null);
 						log.info(">>>>>>>PatientProgram.....UPDATED !");
 					}
 				}

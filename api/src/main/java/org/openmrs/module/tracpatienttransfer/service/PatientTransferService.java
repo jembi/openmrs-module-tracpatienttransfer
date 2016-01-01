@@ -6,6 +6,9 @@ package org.openmrs.module.tracpatienttransfer.service;
 import java.util.Date;
 import java.util.List;
 
+import org.openmrs.DrugOrder;
+import org.openmrs.Patient;
+
 /**
  * @author Yves GAKUBA
  * 
@@ -53,4 +56,5 @@ public interface PatientTransferService {
 	
 	public Integer getNumberOfPatientCareResumeByReason(String reason);
 
+	public List<DrugOrder> getDrugOrdersByPatient(Patient patient);
 }
