@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.openmrs.Obs;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.db.hibernate.DbSession;
+import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.module.tracpatienttransfer.db.PatientTransferDAO;
 import org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientConstant;
 
@@ -24,12 +24,12 @@ import org.openmrs.module.tracpatienttransfer.util.TransferOutInPatientConstant;
 public class PatientTransferDAOImpl implements PatientTransferDAO {
 
 	private Log log = LogFactory.getLog(this.getClass());
-	private SessionFactory sessionFactory;
+	private DbSessionFactory sessionFactory;
 
 	/**
 	 * @return the sessionFactory
 	 */
-	public SessionFactory getSessionFactory() {
+	public DbSessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
@@ -37,7 +37,7 @@ public class PatientTransferDAOImpl implements PatientTransferDAO {
 	 * @param sessionFactory
 	 *            the sessionFactory to set
 	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	public void setSessionFactory(DbSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
@@ -46,21 +46,21 @@ public class PatientTransferDAOImpl implements PatientTransferDAO {
 	 * 
 	 * @return
 	 */
-	private Session getSession() {
-		if (getSessionFactory().isClosed())
+	private DbSession getSession() {
+		if (getSessionFactory().getHibernateSessionFactory().isClosed())
 			log.info(">>>>PTO_DAO>> sessionFactory is closed!");
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		if (session == null) {
 			log.info(">>>>PTO_DAO>> Trying to close the existing session...");
 			Context.closeSession();
-			log.info(">>>>PTO_DAO>> Session closed.");
+			log.info(">>>>PTO_DAO>> DbSession closed.");
 			log.info(">>>>PTO_DAO>> Trying to open new session...");
 			Context.openSession();
-			log.info(">>>>PTO_DAO>> New Session created.");
+			log.info(">>>>PTO_DAO>> New DbSession created.");
 			try {
 				session = getSessionFactory().getCurrentSession();
 			} catch (Exception e) {
-				log.error(">>>>>>>>PTO_DAO>> Session Error : " + session);
+				log.error(">>>>>>>>PTO_DAO>> DbSession Error : " + session);
 				e.printStackTrace();
 			}
 		}
