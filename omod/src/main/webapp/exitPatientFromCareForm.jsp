@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/headerMinimal.jsp"%>
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/patienttransfers.css" />
+<openmrs:htmlInclude file="/moduleResources/tracpatienttransfer/patienttransfers.css" />
 
 <openmrs:require privilege="Exit a patient from care" otherwise="/login.htm"/>
 
@@ -9,10 +9,10 @@
 	var $toip = jQuery.noConflict();
 </script>
 
-<h2><spring:message code="@MODULE_ID@.title" /></h2>
+<h2><spring:message code="tracpatienttransfer.title" /></h2>
 
 <br/>
-<b class="boxHeader"><spring:message code="@MODULE_ID@.title"/></b>
+<b class="boxHeader"><spring:message code="tracpatienttransfer.title"/></b>
 <div class="box" id="formTransfer">
 	<form method="post" action="exitPatientFromCare.form?patientId=${param.patientId}&save=true" name="exitPatientFromCareForm">
 		
@@ -33,13 +33,13 @@
 			</tr>
 			<tr>
 		   		<td><spring:message code="Patient.names"/></td>
-				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.patientNames"/>"/></td>
+				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.patientNames"/>"/></td>
 		       	<td><b>${patient.personName}</b></td>
 				<td></td>
 		  	</tr>
 		    <tr>
 		   		<td><spring:message code="Encounter.provider" /></td>
-				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.provider"/>"/></td>
+				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.provider"/>"/></td>
 		       	<td><select name="provider" id="provider">
 		       			<option value="0">--</option>
 		       			<c:forEach items="${providers}" var="provider">
@@ -50,19 +50,19 @@
 		    </tr>
 		    <tr>
 		   		<td><spring:message code="Encounter.location" /></td>
-				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.location"/>"/></td>
+				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.location"/>"/></td>
 		      	<td><openmrs_tag:locationField formFieldName="location" initialValue="${locationId}" /></td>
 				<td><span id="locationError"></span></td>
 		    </tr>
 			<tr>
 				<td><spring:message code="Encounter.datetime"/></td>
-				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.encounterDatetime"/>"/></td>
+				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.encounterDatetime"/>"/></td>
 				<td><input id="encounterDate" name="encounterDate" value="" size="11" type="text" onclick="showCalendar(this)" onchange="CompareDates('<openmrs:datePattern />');" /><span id="encounterDateError"></td>
 				<td></span></td>
 			</tr>
 			<tr>
 		   		<td>${reasonForExitingCare}</td>
-				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.reasonPatientExitedCare"/>"/></td>
+				<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.reasonPatientExitedCare"/>"/></td>
 		       	<td><select name="reasonExitCare" id="reasonPatientExitedCareId">
 		       			<option value="0">--</option>
 		       			<c:forEach items="${exitFromCareReasons}" var="reason">
@@ -78,25 +78,25 @@
 		  				<table>
 							<tr>
 						   		<td width="250px">${reasonForTransferOut}</td>
-								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.reasonForTransferOut"/>"/></td>
+								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.reasonForTransferOut"/>"/></td>
 						       	<td><textarea name="reasonTransferOut" id="reasonTransferOut" rows="3" cols="40"></textarea></td>
 								<td><span id="reasonTransferOutError"></span></td>
 						  	</tr>
 							<tr>
 						   		<td>${transferOutDate}</td>
-								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.transferOutDate"/>"/></td>
+								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.transferOutDate"/>"/></td>
 						       	<td><input name="transferOutDate" id="transferOutDate" value="" size="11" type="text" onclick="showCalendar(this)" /></td>
 								<td><span id="transferOutDateError"></span></td>
 						  	</tr>
 							<tr>
 						   		<td>${transferOutToLocation}</td>
-								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.transferOutToLocation"/>"/></td>
+								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.transferOutToLocation"/>"/></td>
 						       	<td><span id="locationDropDownSpan"><openmrs_tag:locationField formFieldName="locationTo" initialValue="" /></span></td>
 								<td><span id="transferOutToLocationError"></span></td>
 						  	</tr>
 							<tr>
-						   		<td><spring:message code="@MODULE_ID@.locationNotFound"/></td>
-								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.transferOutToLocationFreeText"/>"/></td>
+						   		<td><spring:message code="tracpatienttransfer.locationNotFound"/></td>
+								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.transferOutToLocationFreeText"/>"/></td>
 						       	<td><input type="checkbox" onclick="showHideLocationFreeText();" name="chkbx_locationNotFound" id="chkbx_locationNotFoundId"/><span id="locationNotFoundSpan" style="display: none;"><input size="39" type="text" name="transferToLocationText" id="transferToLocationTextId"/></span></td>
 								<td><span id="transferOutToLocationTextError"></span></td>
 						  	</tr>  					
@@ -110,13 +110,13 @@
 		  				<table>
 							<tr>
 						   		<td width="250px">Date of Death</td>
-								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.dateOfDeath"/>"/></td>
+								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.dateOfDeath"/>"/></td>
 						       	<td><input name="dateOfDeath" id="dateOfDeath" value="" size="11" type="text" onclick="showCalendar(this)" /></td>
 								<td><span id="dateOfDeathError"></span></td>
 						  	</tr>
 							<tr>
 						   		<td>${causeOfDeath_title}</td>
-								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/@MODULE_ID@/images/help.gif" title="<spring:message code="@MODULE_ID@.help.causeOfDeath"/>"/></td>
+								<td><img border="0" src="<openmrs:contextPath/>/moduleResources/tracpatienttransfer/images/help.gif" title="<spring:message code="tracpatienttransfer.help.causeOfDeath"/>"/></td>
 						       	<td><select name="causeOfDeath" id="causeOfDeathId">
 						       			<option value="0">--</option>
 						       			<c:forEach items="${causeOfDeathOptions}" var="cause_death">

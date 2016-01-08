@@ -15,13 +15,13 @@
     	<property name="mappings">
             <props>
             	<!-- <prop key="**/patientExitPortlet.portlet">patientExitHistoryPortletController</prop> -->
-	           <prop key="module/@MODULE_ID@/exitPatientFromCare.form">tracpatienttransferFormController</prop>
-	           <prop key="module/@MODULE_ID@/patientExitedFromCare.list">tracpatientExitedFromCareListController</prop>
-	           <prop key="module/@MODULE_ID@/overview.form">myNewController</prop>
-	           <prop key="module/@MODULE_ID@/resumeCare.form">resumeCareController</prop>
-	           <prop key="module/@MODULE_ID@/advancedSearch.form">patientExitedFromCareAdvancedSearchFormController</prop>
-	           <prop key="module/@MODULE_ID@/patientsResumedCare.list">patientExitedFromCarePatientResumedCareController</prop>
-	           <prop key="module/@MODULE_ID@/chart.htm">chartController</prop>
+	           <prop key="module/tracpatienttransfer/exitPatientFromCare.form">tracpatienttransferFormController</prop>
+	           <prop key="module/tracpatienttransfer/patientExitedFromCare.list">tracpatientExitedFromCareListController</prop>
+	           <prop key="module/tracpatienttransfer/overview.form">myNewController</prop>
+	           <prop key="module/tracpatienttransfer/resumeCare.form">resumeCareController</prop>
+	           <prop key="module/tracpatienttransfer/advancedSearch.form">patientExitedFromCareAdvancedSearchFormController</prop>
+	           <prop key="module/tracpatienttransfer/patientsResumedCare.list">patientExitedFromCarePatientResumedCareController</prop>
+	           <prop key="module/tracpatienttransfer/chart.htm">chartController</prop>
 	        </props>
 		</property>
     </bean>
@@ -47,27 +47,27 @@
 	<!-- <bean id="patientExitHistoryPortletController" class="@MODULE_PACKAGE@.web.controller.EPFC_PatientExitHistoryPortletController" /> -->
 	
     <bean id="patientExitedFromCarePatientResumedCareController" class="@MODULE_PACKAGE@.web.controller.EPFC_PatientsResumedCareController">
-		<property name="viewName"><value>/module/@MODULE_ID@/patientsResumedCareList</value></property>
+		<property name="viewName"><value>/module/tracpatienttransfer/patientsResumedCareList</value></property>
     </bean>
 	
     <bean id="patientExitedFromCareAdvancedSearchFormController" class="@MODULE_PACKAGE@.web.controller.AdvancedSearchFormController">
-		<property name="viewName"><value>/module/@MODULE_ID@/advancedSearch</value></property>
+		<property name="viewName"><value>/module/tracpatienttransfer/advancedSearch</value></property>
     </bean>
 	
     <bean id="resumeCareController" class="@MODULE_PACKAGE@.web.controller.EPFC_ResumeCareFormController">
-		<property name="viewName"><value>/module/@MODULE_ID@/resumeCareForm</value></property>
+		<property name="viewName"><value>/module/tracpatienttransfer/resumeCareForm</value></property>
     </bean>
 	
     <bean id="tracpatienttransferFormController" class="@MODULE_PACKAGE@.web.controller.PatientExitFromCareFormController">
-		<property name="viewName"><value>/module/@MODULE_ID@/exitPatientFromCareForm</value></property>
+		<property name="viewName"><value>/module/tracpatienttransfer/exitPatientFromCareForm</value></property>
     </bean>
 	
     <bean id="tracpatientExitedFromCareListController" class="@MODULE_PACKAGE@.web.controller.ExitPatientFromCareListController">
-		<property name="viewName"><value>/module/@MODULE_ID@/patientExitedFromCareList</value></property>
+		<property name="viewName"><value>/module/tracpatienttransfer/patientExitedFromCareList</value></property>
     </bean>
 	
     <bean id="myNewController" class="@MODULE_PACKAGE@.web.controller.EPFC_OverviewController">
-		<property name="viewName"><value>/module/@MODULE_ID@/overview</value></property>
+		<property name="viewName"><value>/module/tracpatienttransfer/overview</value></property>
     </bean>
 	
     <!-- /Controllers -->

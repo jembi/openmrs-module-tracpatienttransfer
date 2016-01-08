@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/listing.css" />
+<openmrs:htmlInclude file="/moduleResources/tracpatienttransfer/listing.css" />
 <%@ taglib prefix="transfertag" uri="/WEB-INF/view/module/tracpatienttransfer/taglibs/transfertag.tld" %>
 
 <c:if test="${pehObjects.obsReasonExitingCare ne null}">

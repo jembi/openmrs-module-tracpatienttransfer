@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.2//EN" "http://resources.openmrs.org/doctype/config-1.2.dtd">
 <module configVersion="1.2">
 	
 	<!-- Base Module Properties -->
-	<id>@MODULE_ID@</id>
-	<name>@MODULE_NAME@</name>
-	<version>@MODULE_VERSION@</version>
-	<package>@MODULE_PACKAGE@</package>
+	<id>tracpatienttransfer</id>
+	<name>${project.parent.name}</name>
+	<version>${project.parent.version}</version>
+	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
 	<author>Yves GAKUBA</author>
 	<description>
 			Management of exits of patients from care
@@ -16,33 +15,33 @@
 		<require_module version="0.1.1">org.openmrs.module.mohtracportal</require_module>
 	</require_modules>
 
-	<activator>@MODULE_PACKAGE@.TracPatientTransferActivator</activator>
+	<activator>${project.parent.groupId}.${project.parent.artifactId}.TracPatientTransferActivator</activator>
 	
-	<!-- <updateURL>https://dev.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
+	<!-- <updateURL>https://dev.openmrs.org/modules/download/tracpatienttransfer/update.rdf</updateURL> -->
 	<!-- /Base Module Properties -->
 	
-	<require_version>1.9.0</require_version>
+	<require_version>1.9.9</require_version>
 	
 	<!-- Extensions -->
 	<extension>
 		<point>org.openmrs.tracmodule.list</point>
-		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
 	</extension>
 		
 	<extension>
 		<point>org.openmrs.patientDashboard.patientSummary</point>
-		<class>@MODULE_PACKAGE@.extension.html.TracPatientTransferExt</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.TracPatientTransferExt</class>
 	</extension>
 	
 	<!-- <extension>
 		<point>org.openmrs.patientDashboard.overviewBox</point>
-		<class>@MODULE_PACKAGE@.extension.html.PatientExitOverviewTabExt</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.PatientExitOverviewTabExt</class>
 	</extension> -->
 	
 	<!-- AOP
 	<advice>
 		<point>org.openmrs.api.FormService</point>
-		<class>@MODULE_PACKAGE@.advice.DuplicateFormAdvisor</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.advice.DuplicateFormAdvisor</class>
 	</advice>
 	 /AOP -->
 	
@@ -78,7 +77,7 @@
 
 	<!-- Required Global Properties 
 	<globalProperty>
-		<property>@MODULE_ID@.someProperty</property>
+		<property>tracpatienttransfer.someProperty</property>
 		<defaultValue></defaultValue>
 		<description>
 			A description of the global property goes here.  The description
@@ -92,14 +91,14 @@
 	<dwr>
 		<allow>
 			<create creator="new" javascript="DWRFormEntryService">
-				<param name="class" value="org.openmrs.module.@MODULE_ID@.web.DWRFormEntryService"/>
+				<param name="class" value="org.openmrs.module.tracpatienttransfer.web.DWRFormEntryService"/>
 				<include method="enterForm"/>
 			</create>
 		</allow>
 
 		<signatures>
 			<![CDATA[
-			import @MODULE_PACKAGE@.web.DWRFormEntryService;
+			import ${project.parent.groupId}.${project.parent.artifactId}.web.DWRFormEntryService;
 			DWRFormEntryService.enterForm(Integer patientId, Integer formId, boolean useEncounter, List<String> fields);
 			]]>
 		</signatures>	
@@ -110,14 +109,14 @@
 	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
 	<servlet>
 		<servlet-name>formDownload</servlet-name>
-		<servlet-class>@MODULE_PACKAGE@.web.FormDownloadServlet</servlet-class>
+		<servlet-class>${project.parent.groupId}.${project.parent.artifactId}.web.FormDownloadServlet</servlet-class>
 	</servlet>
 	-->
 	<!-- /Servlets -->
 	
 	
 	<!-- Internationalization -->
-	<!-- All message codes should start with @MODULE_ID@.* -->
+	<!-- All message codes should start with tracpatienttransfer.* -->
 	<messages>
 		<lang>en</lang>
 		<file>messages.properties</file>

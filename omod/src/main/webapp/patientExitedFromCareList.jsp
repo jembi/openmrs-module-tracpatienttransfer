@@ -1,20 +1,20 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 <%@ taglib prefix="transfertag" uri="/WEB-INF/view/module/tracpatienttransfer/taglibs/transfertag.tld" %>
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/patienttransfers.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/listing.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/listingstyle.css" />
+<openmrs:htmlInclude file="/moduleResources/tracpatienttransfer/patienttransfers.css" />
+<openmrs:htmlInclude file="/moduleResources/tracpatienttransfer/listing.css" />
+<openmrs:htmlInclude file="/moduleResources/tracpatienttransfer/listingstyle.css" />
 
 <%@ include file="template/localHeader.jsp"%>
 
-<openmrs:require privilege="Manage search/listing on Patient Exited from care" otherwise="/login.htm" redirect="/module/@MODULE_ID@/patientExitedFromCare.list" />
+<openmrs:require privilege="Manage search/listing on Patient Exited from care" otherwise="/login.htm" redirect="/module/tracpatienttransfer/patientExitedFromCare.list" />
 
-<h2><spring:message code="@MODULE_ID@.patientExitedFromCare"/></h2>
+<h2><spring:message code="tracpatienttransfer.patientExitedFromCare"/></h2>
 <br/>
 
 <div style="margin:5px;">
 	<div id="data" style="margin: auto; width: 97%; font-size: 0.9em;">
-		<a href="#" id="viewGraph"><spring:message code="@MODULE_ID@.tablelist.viewChart"/></a>
+		<a href="#" id="viewGraph"><spring:message code="tracpatienttransfer.tablelist.viewChart"/></a>
 		<div id="list_container" style="width: 99%; padding-top: 4px;">
 			<div id="list_title">
 				<div class="list_title_msg">${title}</div>
@@ -22,10 +22,10 @@
 					<span>
 						<openmrs:hasPrivilege privilege="Export Collective Patient Data">
 							<form action="patientExitedFromCare.list?page=1&export=csv${prmtrs}" method="post" style="display: inline;">
-								<input type="submit" class="list_exportBt" value="<spring:message code="@MODULE_ID@.patientlist.xprt.csv"/>" title="<spring:message code="@MODULE_ID@.patientlist.csv"/>"/>
+								<input type="submit" class="list_exportBt" value="<spring:message code="tracpatienttransfer.patientlist.xprt.csv"/>" title="<spring:message code="tracpatienttransfer.patientlist.csv"/>"/>
 							</form>&nbsp;&nbsp;
 							<form action="patientExitedFromCare.list?page=1&export=pdf${prmtrs}" method="post" style="display: inline;">
-								<input type="submit" class="list_exportBt" value="<spring:message code="@MODULE_ID@.patientlist.xprt.pdf"/>" title="<spring:message code="@MODULE_ID@.patientlist.pdf"/>"/>
+								<input type="submit" class="list_exportBt" value="<spring:message code="tracpatienttransfer.patientlist.xprt.pdf"/>" title="<spring:message code="tracpatienttransfer.patientlist.pdf"/>"/>
 							</form>
 						</openmrs:hasPrivilege>
 					</span>
@@ -34,22 +34,22 @@
 			</div>
 			<table id="list_data">
 				<tr>
-					<th rowspan="2" width="12%" class="columnHeader"><spring:message code="@MODULE_ID@.general.exitwhen"/> ?</th>
-					<th rowspan="2" width="3%" class="columnHeader numberCol"><spring:message code="@MODULE_ID@.general.number"/></th>
+					<th rowspan="2" width="12%" class="columnHeader"><spring:message code="tracpatienttransfer.general.exitwhen"/> ?</th>
+					<th rowspan="2" width="3%" class="columnHeader numberCol"><spring:message code="tracpatienttransfer.general.number"/></th>
 					<openmrs:hasPrivilege privilege="View Patient Names">
-						<th rowspan="2" width="16%" class="columnHeader"><spring:message code="@MODULE_ID@.general.names"/></th>
+						<th rowspan="2" width="16%" class="columnHeader"><spring:message code="tracpatienttransfer.general.names"/></th>
 					</openmrs:hasPrivilege>
 					<th colspan="2" class="columnHeader"><center><spring:message code="Patient.identifier"/></center></th>
-					<th rowspan="2" width="20%" class="columnHeader"><spring:message code="@MODULE_ID@.general.reasonofexit"/></th>
+					<th rowspan="2" width="20%" class="columnHeader"><spring:message code="tracpatienttransfer.general.reasonofexit"/></th>
 					<th rowspan="2" width="15%" class="columnHeader"><spring:message code="Encounter.provider" /></th>
 					<th rowspan="2" width="17%" class="columnHeader"><spring:message code="Encounter.location" /></th>
-					<th rowspan="2" width="3%" class="columnHeader"><spring:message code="@MODULE_ID@.general.view"/></th>
+					<th rowspan="2" width="3%" class="columnHeader"><spring:message code="tracpatienttransfer.general.view"/></th>
 				</tr>			
 				<tr>
 					<th width="7%" class="columnHeader">${transfertag:identifierTypeNameById(tracnetIdentifierTypeId)}</th>
 					<th width="7%" class="columnHeader">${transfertag:identifierTypeNameById(localIdentifierTypeId)}</th>
 				</tr>
-				<c:if test="${empty obsList}"><tr><td colspan="9" width="100%"  style="text-align: center;"><spring:message code="@MODULE_ID@.tablelist.empty"/></td></tr></c:if>
+				<c:if test="${empty obsList}"><tr><td colspan="9" width="100%"  style="text-align: center;"><spring:message code="tracpatienttransfer.tablelist.empty"/></td></tr></c:if>
 				<c:set value="0" var="index"/>
 				<c:forEach items="${obsList}" var="obs" varStatus="status">
 					<tr>
@@ -75,7 +75,7 @@
 						</td>
 						<td class="rowValue ${status.count%2!=0?'even':''}">${obs.encounter.provider.personName}</td>
 						<td class="rowValue ${status.count%2!=0?'even':''}"><a href="patientExitedFromCare.list?page=1${prmtrs}&location=${obs.location.id}">${obs.location.name}</a></td>
-						<td class="rowValue ${status.count%2!=0?'even':''}"><a title="<spring:message code="@MODULE_ID@.general.viewrelated.obs"/>" href="<openmrs:contextPath/>/admin/observations/obs.form?obsId=${obs.obsId}"><spring:message code="@MODULE_ID@.general.sigle.obs"/></a><c:if test="${obs.encounter!=null}">&nbsp;&nbsp;&nbsp;<a title="<spring:message code="@MODULE_ID@.general.viewrelated.encounter"/>" href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=${obs.encounter.encounterId}"><spring:message code="@MODULE_ID@.general.sigle.encounter"/></a></c:if></td>
+						<td class="rowValue ${status.count%2!=0?'even':''}"><a title="<spring:message code="tracpatienttransfer.general.viewrelated.obs"/>" href="<openmrs:contextPath/>/admin/observations/obs.form?obsId=${obs.obsId}"><spring:message code="tracpatienttransfer.general.sigle.obs"/></a><c:if test="${obs.encounter!=null}">&nbsp;&nbsp;&nbsp;<a title="<spring:message code="tracpatienttransfer.general.viewrelated.encounter"/>" href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=${obs.encounter.encounterId}"><spring:message code="tracpatienttransfer.general.sigle.encounter"/></a></c:if></td>
 					</tr>
 				</c:forEach>
 				<c:remove var="index"/>
@@ -88,7 +88,7 @@
 						<tr>
 							<c:if test="${prevPage!=-1}">
 								<td width="100px" class="" style="padding:1px 2px 1px 2px; vertical-align: text-top;">
-									<a href="patientExitedFromCare.list?page=1${prmtrs}"><div class="list_pageNumber" style="text-align: center;">|&lt; <spring:message code="@MODULE_ID@.first"/></div></a>
+									<a href="patientExitedFromCare.list?page=1${prmtrs}"><div class="list_pageNumber" style="text-align: center;">|&lt; <spring:message code="tracpatienttransfer.first"/></div></a>
 								</td>
 								<td width="100px" class="" style="padding:1px 2px 1px 2px; vertical-align: text-top;"><a href="patientExitedFromCare.list?page=${prevPage}${prmtrs}">
 									<div class="list_pageNumber" style="text-align: center;">&lt;&lt; <spring:message code="general.previous"/></div></a>
@@ -99,7 +99,7 @@
 									<a href="patientExitedFromCare.list?page=${nextPage}${prmtrs}"><div class="list_pageNumber" style="text-align: center;"><spring:message code="general.next"/> &gt;&gt;</div></a>
 								</td>
 								<td width="100px" class="" style="padding:1px 2px 1px 2px; vertical-align: text-top;">
-									<a href="patientExitedFromCare.list?page=${lastPage}${prmtrs}"><div class="list_pageNumber" style="text-align: center;"><spring:message code="@MODULE_ID@.last"/> &gt;|</div></a>
+									<a href="patientExitedFromCare.list?page=${lastPage}${prmtrs}"><div class="list_pageNumber" style="text-align: center;"><spring:message code="tracpatienttransfer.last"/> &gt;|</div></a>
 								</td>
 							</c:if>
 						</tr>
@@ -112,12 +112,12 @@
 	</div>
 	
 	<div id="graph" style="display:none; margin: auto; width: 100%; font-size: 0.9em;">
-		<a href="#" id="viewData"><spring:message code="@MODULE_ID@.tablelist.viewData"/></a>
+		<a href="#" id="viewData"><spring:message code="tracpatienttransfer.tablelist.viewData"/></a>
 		
 		<c:if test="${param.reason eq null}">
 			<div style="width: 70%; margin: auto;">
 				<div class="list_container">
-					<div class="list_title"><spring:message code="@MODULE_ID@.graph.considering.totalnumberofpatient"/></div>
+					<div class="list_title"><spring:message code="tracpatienttransfer.graph.considering.totalnumberofpatient"/></div>
 					<div class="chartHolder">
 						<center><img src="chart.htm?chart=evolutionOfReasonOfExit&width=700&height=350"/></center>
 					</div>
@@ -129,7 +129,7 @@
 			<div style="padding-top: 5px;">
 				<div style="width: 38%; float: left;">
 					<div class="list_container">
-						<div class="list_title"><spring:message code="@MODULE_ID@.graph.considering.totalnumberofpatient"/></div>
+						<div class="list_title"><spring:message code="tracpatienttransfer.graph.considering.totalnumberofpatient"/></div>
 						<div class="chartHolder">
 							<center><img src="chart.htm?chart=reasonOfExit&reason=${param.reason}&width=450&height=350"/></center>
 						</div>
@@ -137,7 +137,7 @@
 				</div>
 				<div style="width: 60%; float: right;">
 					<div class="list_container">
-						<div class="list_title"><spring:message code="@MODULE_ID@.graph.last12monthevolution"/></div>
+						<div class="list_title"><spring:message code="tracpatienttransfer.graph.last12monthevolution"/></div>
 						<div class="chartHolder">
 							<center><img src="chart.htm?chart=evolutionOfReasonOfExit&reason=${param.reason}&width=700&height=350"/></center>
 						</div>
